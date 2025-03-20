@@ -1,0 +1,132 @@
+/* Wrapper Container */
+.Arival-banner-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns by default */
+  gap: 20px; /* Reduced gap for better responsiveness */
+  height: auto; /* Adjust height dynamically */
+}
+
+/* XL Banner */
+.banner-xl {
+  background-size: cover; /* Make it more responsive */
+  background-position: center;
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 20px; /* Reduced padding for small screens */
+  height: 300px; /* Default height */
+}
+
+/* Small Single Banner */
+.small-signle-banner {
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 15px;
+  height: 300px; /* Default height */
+}
+
+/* Small Two Banners */
+.small-two-banner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.mini-banner {
+  background-position: center;
+  background-size: cover;
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 15px;
+  height: 150px; /* Default height */
+}
+
+/* Text Styling */
+.banners-text {
+  width: 100%; /* Fully responsive width */
+  max-width: 250px; /* Limit maximum width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--text-white);
+}
+
+.banners-text h1 {
+  margin: 0 0 10px 0;
+  font-size: 18px; /* Reduced size for responsiveness */
+}
+
+.banners-text p {
+  margin: 0 0 10px 0;
+}
+
+.banners-text a {
+  color: var(--text-white);
+  border-bottom: 1px solid var(--text-white);
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-size: 14px; /* Adjust font size */
+}
+
+.banners-text a:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .Arival-banner-container {
+    grid-template-columns: 1fr; /* Stack banners vertically */
+  }
+
+  .banner-xl {
+    height: 250px; /* Adjust height for medium screens */
+    padding: 15px;
+  }
+
+  .small-signle-banner,
+  .mini-banner {
+    height: 200px; /* Reduce height for smaller screens */
+  }
+
+  .banners-text h1 {
+    font-size: 16px; /* Smaller text for medium screens */
+  }
+
+  .banners-text p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-xl {
+    height: 200px; /* Further reduce height for small screens */
+  }
+
+  .small-signle-banner,
+  .mini-banner {
+    height: 150px;
+  }
+
+  .banners-text {
+    max-width: 200px; /* Adjust maximum width */
+  }
+
+  .banners-text h1 {
+    font-size: 14px;
+  }
+
+  .banners-text p {
+    font-size: 12px;
+  }
+
+  .banners-text a {
+    font-size: 12px;
+  }
+}
