@@ -18,7 +18,8 @@ const WishlistCard = () => {
     }
 
     useEffect(() => {
-        const items = JSON.parse(localStorage.getItem('wishlist'))
+        const rawItem = localStorage.getItem('wishlist')
+        const items = rawItem ? JSON.parse(rawItem) : []
         setProducts(items)
         setWishlistItemsCount(items.length)
 
@@ -28,17 +29,19 @@ const WishlistCard = () => {
             setForYouPro(res.products)
         }
         fetchdata()
-    }, [])
+    }, [localStorage.getItem('wishlist')])
 
     const handleDeleteWishlist = (id) => {
         const remainPro = products?.filter((prev) => prev.id !== id)
         setProducts(remainPro)
         localStorage.setItem('wishlist', JSON.stringify(remainPro))
         setWishlistItemsCount(remainPro.length)
+
     }
 
     const moveAllToBag = async () => {
-        const cartpro = JSON.parse(localStorage.getItem('products'))
+        const rawProducts = localStorage.getItem('products')
+        const cartpro = rawProducts ? JSON.parse(rawProducts) : []
         const allproducts = products.map((pro) => ({
             id: pro.id,
             name: pro.title,
@@ -80,34 +83,32 @@ const WishlistCard = () => {
                 <button onClick={moveAllToBag} className='Btn-large-white'>Move All To Bag</button>
             </div>
             <div className='Wrapper mt-6'>
-                {products?.map((curPro) =>
-                    <div key={curPro.id} className="card" >
-                        <div className='image-box'>
-                            <div className='img-div'>
-                                <img onClick={() => ShowProductdetail(curPro)} id='card-img' src={curPro?.thumbnail} alt="" />
+                {products?.length > 0 ? (
+                    products?.map((curPro) =>
+                        <div key={curPro.id} className="card" >
+                            <div className='image-box'>
+                                <div className='img-div'>
+                                    <img onClick={() => ShowProductdetail(curPro)} id='card-img' src={curPro?.thumbnail} alt="" />
+                                </div>
+                                <i onClick={() => handleDeleteWishlist(curPro.id)} className="fa-solid fa-trash-can wishlist-icon"></i>
+                                <p className='disc-percentage'>-{curPro?.discountPercentage}%</p>
+                                <button onClick={() => handleAddToCart(curPro)} className='add-to-cart-btn'>Add To Cart</button>
                             </div>
-                            <i onClick={() => handleDeleteWishlist(curPro.id)} className="fa-solid fa-trash-can wishlist-icon"></i>
-                            <p className='disc-percentage'>-{curPro?.discountPercentage}%</p>
-                            <button onClick={() => handleAddToCart(curPro)} className='add-to-cart-btn'>Add To Cart</button>
-                        </div>
-                        <div>
-                            <h1 className='productName' onClick={() => ShowProductdetail(curPro)}>{curPro?.title}</h1>
-                            <div className='price-box'>
-                                <p className='productPrice'>Rs: {curPro?.price}</p>
-                                <p className='productActualPrice'>{curPro?.price * 2} </p>
+                            <div>
+                                <h1 className='productName' onClick={() => ShowProductdetail(curPro)}>{curPro?.title}</h1>
+                                <div className='price-box'>
+                                    <p className='productPrice'>Rs: {curPro?.price}</p>
+                                    <p className='productActualPrice'>{curPro?.price * 2} </p>
+                                </div>
                             </div>
-                            {/* <div className="stars product-rating">
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <p className='rating-count'>{curPro?.rating}</p>
-                </div> */}
                         </div>
+                    )
+                ) : (
+                    <div className="empty-state" style={{ textAlign: 'center', marginTop: '50px', margin: '0 auto', fontSize: '20px'}}>
+                        <i className="fa-solid fa-heart-broken"></i>
+                        <p>Your wishlist is empty. Start adding products!</p>
                     </div>
-                )
-                }
+                )}
             </div>
 
             <div className='flex-ro justify-between mt-8'>

@@ -38,6 +38,8 @@ const Employe = () => {
         return slides
     }
 
+
+
     return (
 
         <div className='about-Employes'>
@@ -45,7 +47,7 @@ const Employe = () => {
                 {getVisibleSlides()?.map((curEmp) => (
                     <div className="Employe" key={curEmp.id}>
                         <div className="Employe-image">
-                            <img src={curEmp.image} alt="Employe Image" />
+                            <img src="/page-heading/background.jpg" className='w-10 h-10' alt="Employe Image" />
                         </div>
                         <p className='Eploye-Name'>{curEmp.name}</p>
                         <p className="Employe-Post">{curEmp.post} </p>
